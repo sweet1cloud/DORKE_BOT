@@ -9,7 +9,7 @@
 #아래 내용부터 봇의 코드입니다.
 #2020년 8월 5일부터 기존 도르크봇의 소스를 갈아엎기로 했습니다. 현재 보고 계신 코드들은 이제부터 사용되지 않을 예정입니다.
 #----------------------------
-import discord, asyncio, random, datetime, time, os, tasks
+import discord, asyncio, random, datetime, time
 from discord.ext import commands
 from discord.ext.commands import Bot
 from discord.utils import get
@@ -20,14 +20,11 @@ app = commands.Bot(command_prefix='d#')
 
 @app.event
 async def on_ready():
-    print("LOADING...")
-    print("Fix. 191210 | Last Update 20200829 ver.")
+    print("Fix. 191210 | Last 20210110 ver.")
     print("")
     print("■■■■■■■■■■■■■■■[ I  N  F  O ]■■■■■■■■■■■■■■■")
     print("")
     print(">> Sourced By The Circle! ProJect, Aria_Public ProJect")
-    print("[INFO] Loading...")
-    print("[INFO] Bot Commands Loading Complete!")
     print("")
     print("■■■■■■■■■■■■■■■[ B O T -  b o o t i n g  - C O M P L E T E ! ]■■■■■■■■■■■■■■■")
     print("")
@@ -36,13 +33,16 @@ async def on_ready():
     print("BOT ID :")
     print(app.user.id)
     print("이 메시지가 뜬다면 봇 디버깅에 성공한 것입니다.")
-    game = discord.Game("[d#help]도르크봇을 불러보세요!")
+    game = discord.Game("[d#도움말]도르크봇을 불러보세요!")
     await app.change_presence(status=discord.Status.online, activity=game)
+    channel = app.get_channel(709228507540095028) #도르크 프로젝트
+    await channel.send('봇켜짐')
+
 @app.command(pass_context=True)
 async def 도움말(ctx):
     embed = discord.Embed(
             title="도움말",
-            description="> 도르크봇 1.0 버전을 이용해주셔서 감사합니다!\n> 봇 공식 페이지에서 봇 명령어를 확인하실 수 있습니다!\n ``봇 공식 페이지:`` [도르크봇 깃헙](https://github.com/sweet1cloud/DORKE_BOT)\n ```Bot Running Information \n 현재 돌아가고 있는곳 : 개발자 컴퓨터에서 구동 중입니다!(24시간 X) \n 프로그래밍 언어 : Python 3.7.0 32-bit (With VSC)``` \n```공지 시스템: DPNK\n봇 소스: The Circles! ProJect, Aria_Public ProJect\n(라이센스 위반 없이 사용중.)```\n ```개발자 연락처: 디스코드: Sweet_Cloud#9892, \n이메일: idoyun027@gmail.com```\n```help - DM으로 전송\n도움 - 서버 채팅 채널에 전송```\n``봇 참고 레포지트리:`` [the circle prj](https://github.com/Ryzen72700/thecircle_prj/blob/master/tc_github.py)\n ``봇 참고 레포지트리:`` [Aria prj](https://github.com/Ryzen72700/DISCORDPY_Aria/blob/master/Aria_Public.py)\n``개발자 유튜브``: [youtube](https://www.youtube.com/channel/UC1v2JDiftMw7epyndnVA_Bg)",
+            description="> 도르크봇 1.0 버전을 이용해주셔서 감사합니다!\n> 봇 공식 페이지에서 봇 명령어를 확인하실 수 있습니다!\n ``봇 공식 페이지:`` [도르크봇 깃헙](https://github.com/sweet1cloud/DORKE_BOT)\n ```Bot Running Information \n 현재 돌아가고 있는곳 : 개발자 컴퓨터에서 구동 중입니다!(24시간 X) \n 프로그래밍 언어 : Python 3.7.0 32-bit (With VSC)``` \n```공지 시스템: DPNK\n봇 소스: The Circles! ProJect, Aria_Public ProJect\n(라이센스 위반 없이 사용중.)```\n ```개발자 연락처: 디스코드: [프로필 보기](https://discord.com/users/284143521886109697), \n이메일: idoyun027@gmail.com```\n```help - DM으로 전송\n도움 - 서버 채팅 채널에 전송```\n``봇 참고 레포지트리:`` [the circle prj](https://github.com/Ryzen72700/thecircle_prj/blob/master/tc_github.py)\n ``봇 참고 레포지트리:`` [Aria prj](https://github.com/Ryzen72700/DISCORDPY_Aria/blob/master/Aria_Public.py)\n``개발자 유튜브``: [youtube](https://www.youtube.com/channel/UC1v2JDiftMw7epyndnVA_Bg)",
             timestamp=datetime.datetime.utcnow(),
             color=0x99EAF5
         )
@@ -79,7 +79,7 @@ async def shutdown(ctx):
 async def invite(ctx):
     embed = discord.Embed(
             title=":e_mail: 초대하기!",
-            description="[봇 초대하기](https://discord.com/api/oauth2/authorize?client_id=702477692402008094&permissions=8&scope=bot)\n```봇 초대가 안된다면 DORKE_Σ#9892로 디스코드 DM 보내주세요.```",
+            description="[봇 초대하기](https://discord.com/api/oauth2/authorize?client_id=702477692402008094&permissions=8&scope=bot)\n```봇 초대가 안된다면 [여기](https://discord.com/users/284143521886109697)로 디스코드 DM 보내주세요.```",
             color=0x99EAF5
         )
     await ctx.send(embed=embed)
@@ -135,5 +135,27 @@ async def 반응(ctx):
         await ctx.send("```저랑 가위바위보 게임 하실래요?```\n```d#가위바위보 명령어로 가위바위보 게임이 가능합니다!```")
     elif r == '도르크':
         await ctx.send("https://discord.gg/9Q6Z9p2")
+
+@commands.has_permissions(manage_messages=True) #명령어 사용대상이 메시지 관리 역할이 있는가?
+@app.command(name="채팅청소", pass_context=True)
+async def 채팅청소(ctx, ro):
+    await ctx.channel.purge(limit=int(ro)) #라인 채팅청소
+    await ctx.channel.send("<@" + str(ctx.message.author.id) + "> 님이 채팅을 청소하셨습니다.") #채팅청소안내
+
+@채팅청소.error
+async def 채팅청소_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("삭제할 수를 넣으시지 않으셨습니다.")
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send("당신은 메시지관리 권한이 없어 채팅청소가 불가합니다.")
+
+@app.command(pass_context=True)
+async def 도배(ctx):
+    embed = discord.Embed(
+            title="도배",
+            description="도배",
+            color=0x99EAF5
+        )
+    await ctx.send(embed=embed)
 
 app.run(token)

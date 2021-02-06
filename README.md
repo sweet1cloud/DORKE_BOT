@@ -1,7 +1,7 @@
 # DORKE BOT
 <b><ins>도르크봇 정식 출시!</b><ins><br/>
 <b><ins>[도르크봇 초대하기](https://discord.com/api/oauth2/authorize?client_id=702477692402008094&permissions=8&scope=bot)</b></ins><br/>
-<b><ins>[도르크봇 공식 디스코드 서버(도르크 프로젝트)](https://discord.gg/aYfQYRp)</b></ins>
+<b><ins>[도르크 프로젝트 공식 디스코드 서버](https://discord.gg/aYfQYRp)</b></ins>
 <ins><b><br>[참고 파일 1](https://github.com/Ryzen72700/thecircle_prj/blob/master/tc_github.py)(the circle prj)</ins></b></br>
 <ins><b>[참고 파일 2](https://github.com/Ryzen72700/DISCORDPY_Aria/blob/master/Aria_Public.py)(Aria prj)</ins></b></br>
 <b><ins>[개발자 유튜브](https://www.youtube.com/channel/UC1v2JDiftMw7epyndnVA_Bg)</br></b></ins>

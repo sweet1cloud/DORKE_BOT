@@ -7,7 +7,7 @@
 #2020-06-21 대규모 업데이트
 #2020-06-22 추가 업데이트
 #아래 내용부터 봇의 코드입니다.
-#2020년 8월 5일부터 기존 도르크봇의 소스를 갈아엎기로 했습니다. 현재 보고 계신 코드들은 이제부터 사용되지 않을 예정입니다.
+#도르크봇 2.0도 추후 개발 예정입니다.
 #----------------------------
 import discord, asyncio, random, datetime, time
 from discord.ext import commands
@@ -20,7 +20,7 @@ app = commands.Bot(command_prefix='d#')
 
 @app.event
 async def on_ready():
-    print("Fix. 191210 | Last 20210110 ver.")
+    print("Fix. 191210 | Last 20210206 ver.")
     print("")
     print("■■■■■■■■■■■■■■■[ I  N  F  O ]■■■■■■■■■■■■■■■")
     print("")
@@ -157,5 +157,17 @@ async def 도배(ctx):
             color=0x99EAF5
         )
     await ctx.send(embed=embed)
+
+@app.event
+async def on_message(message):
+    if message.content.startswith("d#정보"):
+        date = datetime.datetime.utcfromtimestamp(((int(message.author.id) >> 22) + 1420070400000) / 1000)
+        embed = discord.Embed(color=0x00ff00)
+        embed.add_field(name="이름", value=message.author.name, inline=True)
+        embed.add_field(name="서버닉네임", value=message.author.display_name, inline=True)
+        embed.add_field(name="가입일", value=str(date.year) + "년" + str(date.month) + "월" + str(date.day) + "일", inline=True)
+        embed.add_field(name="아이디", value=message.author.id, inline=True)
+        embed.set_thumbnail(url=message.author.avatar_url)
+        await message.channel.send(embed=embed)
 
 app.run(token)

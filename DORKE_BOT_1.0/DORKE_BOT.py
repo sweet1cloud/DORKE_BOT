@@ -63,15 +63,15 @@ async def shutdown(ctx):
     if str(ctx.message.author.id) == "284143521886109697":
         embed = discord.Embed(
             title="Shutdown!",
-            description="Bot shutdown... bye bye :wave:",
+            description="Bot shutdown... Goodbye :wave:",
             color=0xFF0000
         )
         await ctx.send(embed=embed)
         await app.close()
     else:
         embed = discord.Embed(
-            title=":warning: 경 고",
-            description="  현재 해당 명령어를 사용할 수 있는 권한은 봇 소유자밖에 없습니다.\n개발자에게 문의를 해주세요."
+            title=":warning: 경고",
+            description=" 현재 해당 명령어를 사용할 수 있는 권한은 봇 소유자밖에 없습니다.\n개발자에게 문의를 해주세요."
         )
         await ctx.send(embed=embed)
 
@@ -79,7 +79,7 @@ async def shutdown(ctx):
 async def invite(ctx):
     embed = discord.Embed(
             title=":e_mail: 초대하기!",
-            description="[봇 초대하기](https://discord.com/api/oauth2/authorize?client_id=702477692402008094&permissions=8&scope=bot)\n```봇 초대가 안된다면 [여기](https://discord.com/users/284143521886109697)로 디스코드 DM 보내주세요.```",
+            description="[봇 초대하기](https://discord.com/api/oauth2/authorize?client_id=702477692402008094&permissions=8&scope=bot)\n봇 초대가 안된다면 [여기](https://discord.com/users/284143521886109697)로 디스코드 DM 보내주세요.",
             color=0x99EAF5
         )
     await ctx.send(embed=embed)
@@ -101,7 +101,7 @@ async def 랜덤로고(ctx):
 
 @app.command(pass_context=True)
 async def 반응(ctx):    
-    str = ['와','상상도못함','dyd', '놀람', 'hello', '당황', 'thinking', 'why', 'dqd', '바보', '멍청이', 'ㅁㄴㅇㄹ', 'simsimhada', 'simsimhanga', '심심해', '도르크']
+    str = ['와','상상도못함','dyd', '놀람', 'hello', '당황', 'thinking', 'why', '바보', '멍청이', 'ㅁㄴㅇㄹ', 'simsimhanga', '심심해']
     r = random.choice(str)
     if r == '와':
         await ctx.send("샌즈")
@@ -119,8 +119,6 @@ async def 반응(ctx):
         await ctx.send(":thinking:")
     elif r == 'why':
         await ctx.send("외않됀데?")
-    elif r == 'dqd':
-        await ctx.send("ㅇㅂㅇ")
     elif r == '바보':
         await ctx.send("어ㅡ허")
     elif r == '멍청이':
@@ -128,26 +126,20 @@ async def 반응(ctx):
     elif r == 'ㅁㄴㅇㄹ':
         await ctx.send("ㅁㄴㅇㄹ")
     elif r == 'simsimhada':
-        await ctx.send("SIMSIMHADA **★**")
-    elif r == 'simsimhanga':
-        await ctx.send("https://discord.gg/wkPDgyg")
-    elif r == '심심해':
-        await ctx.send("```저랑 가위바위보 게임 하실래요?```\n```d#가위바위보 명령어로 가위바위보 게임이 가능합니다!```")
-    elif r == '도르크':
-        await ctx.send("https://discord.gg/9Q6Z9p2")
+        await ctx.send("심심하다 **★**")
 
 @commands.has_permissions(manage_messages=True) #명령어 사용대상이 메시지 관리 역할이 있는가?
-@app.command(name="채팅청소", pass_context=True)
-async def 채팅청소(ctx, ro):
+@app.command(name="clean", pass_context=True)
+async def clean(ctx, ro):
     await ctx.channel.purge(limit=int(ro)) #라인 채팅청소
-    await ctx.channel.send("<@" + str(ctx.message.author.id) + "> 님이 채팅을 청소하셨습니다.") #채팅청소안내
+    await ctx.channel.send("<@" + str(ctx.message.author.id) + "> 님이 채팅을 청소하셨습니다.") #채팅청소 안내
 
-@채팅청소.error
-async def 채팅청소_error(ctx, error):
+@clean.error
+async def clean_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("삭제할 수를 넣으시지 않으셨습니다.")
     if isinstance(error, commands.MissingPermissions):
-        await ctx.send("당신은 메시지관리 권한이 없어 채팅청소가 불가합니다.")
+        await ctx.send("당신은 메시지 관리 권한이 없어 채팅청소가 불가합니다.")
 
 @app.command(pass_context=True)
 async def 도배(ctx):

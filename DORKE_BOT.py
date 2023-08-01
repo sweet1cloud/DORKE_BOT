@@ -6,13 +6,11 @@
 #도움을 주신 분: 기우
 #2020-06-21 대규모 업데이트
 #2020-06-22 추가 업데이트
-#도르크봇 2.0도 추후 개발 예정입니다.
-#2021년 8월 28일 discord.py의 개발 및 서비스 종료
-#2022-02-17 discord.py → nextcord (https://github.com/nextcord/nextcord)
 #아래 내용부터 봇의 코드입니다.
 #----------------------------
 import discord, asyncio, random, datetime, time
-from nextcord.ext import commands
+from discord.ext import commands
+from discord.ext.commands import command
 
 uid = discord_user_id #'discord_user_id' 부분에다가 본인의 디스코드 ID를 입력하세요.
 token = "bot_token" #'bot_token' 부분에다가 봇 토큰을 입력하세요.
@@ -35,8 +33,9 @@ async def on_ready():
     print("이 메시지가 뜬다면 봇 디버깅에 성공한 것입니다.")
     game = discord.Game("[d#도움말]도르크봇을 불러보세요!")
     await app.change_presence(status=discord.Status.online, activity=game)
-    channel = app.get_channel(709228507540095028) #도르크 프로젝트 봇-로그 채널 ID
+    channel = app.get_channel(your-channel-id) #도르크 프로젝트 봇-로그 채널 ID
     await channel.send('봇켜짐')
+
 
 @app.command(pass_context=True)
 async def 도움말(ctx):
@@ -149,18 +148,5 @@ async def 도배(ctx):
             color=0x99EAF5
         )
     await ctx.send(embed=embed)
-
-#임시 비활성화
-#@app.event
-#async def on_message(message):
-    #if message.content.startswith("d#정보"):
-        #date = datetime.datetime.utcfromtimestamp(((int(message.author.id) >> 22) + 1420070400000) / 1000)
-        #embed = discord.Embed(color=0x00ff00)
-        #embed.add_field(name="이름", value=message.author.name, inline=True)
-        #embed.add_field(name="서버닉네임", value=message.author.display_name, inline=True)
-        #embed.add_field(name="가입일", value=str(date.year) + "년" + str(date.month) + "월" + str(date.day) + "일", inline=True)
-        #embed.add_field(name="아이디", value=message.author.id, inline=True)
-        #embed.set_thumbnail(url=message.author.avatar_url)
-        #await message.channel.send(embed=embed)
 
 app.run(token)
